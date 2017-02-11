@@ -4,7 +4,7 @@ namespace MaterialIcons;
 
 use Illuminate\Support\ServiceProvider;
 
-class MaterialIconsetServiceProvider extends ServiceProvider
+class MaterialIconsBridgeServiceProvider extends ServiceProvider
 {
     public function boot()
     {

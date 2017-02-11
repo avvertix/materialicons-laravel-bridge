@@ -1,4 +1,4 @@
-# Material Iconset
+# Material Icons Laravel Bridge
 
 Easily use Google Material Design SVG icons in Laravel Blade templates.
 
@@ -7,7 +7,7 @@ Easily use Google Material Design SVG icons in Laravel Blade templates.
 You can install this package via Composer by running this command in your terminal in the root of your project:
 
 ```
-composer require avvertix/materialicons
+composer require avvertix/materialicons-laravel-bridge
 ```
 
 ## Getting started
@@ -22,7 +22,7 @@ return [
     'providers' => [
         // ...
 
-        MaterialIcons\MaterialIconsetServiceProvider::class,
+        MaterialIcons\MaterialIconsBridgeServiceProvider::class,
 
         // ...
     ],

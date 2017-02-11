@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Blade;
  *
  * @uses BladeSvg\IconFactory
  */
-class IconsetFactory
+class MaterialIconsBridgeFactory
 {
 
     /**

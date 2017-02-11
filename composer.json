@@ -1,6 +1,6 @@
 {
-    "name": "avvertix/materialicons",
-    "description": "Material Design Icons packaged for easy SVG inlining",
+    "name": "avvertix/materialicons-laravel-bridge",
+    "description": "Material Design Icons packaged for easy SVG inlining in Laravel Blade templates",
     "type": "library",
     "license": "Apache2",
     "authors": [
