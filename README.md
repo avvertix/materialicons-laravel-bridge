@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/avvertix/materialicons-laravel-bridge.svg?branch=master)](https://travis-ci.org/avvertix/materialicons-laravel-bridge)
+
 # Material Icons Laravel Bridge
 
 Easily use Google Material Design SVG icons in Laravel Blade templates.
