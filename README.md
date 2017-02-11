@@ -110,9 +110,10 @@ attributes:
 
 ## Use another icon set
 
-...
+Even if this package makes easy to use Google's Material Design icons, it is not limited to that iconset.
 
-Inside `config/materialiconset.php` specify the location of your individual icons:
+You can still use a different iconset by passing the `icon_path` option in the `config/materialiconset.php`
+configuration file. The path refers to the location that contains your individual icons as separate SVG files.
 
 ```php
 <?php
@@ -125,6 +126,9 @@ return [
 ```
 
 > The path is resolved using the `base_path()` helper, so use a relative path to the root of your project.
+
+If you want more freedom (e.g. SVG sprite support) I encourage you to check the 
+[Blade SVG](https://github.com/adamwathan/blade-svg) package by Adam Wathan.
 
 ## Credits
 
