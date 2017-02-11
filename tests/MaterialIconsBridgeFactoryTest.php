@@ -25,8 +25,7 @@ class MaterialIconsBridgeFactoryTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    /** @test */
-    public function icons_are_given_the_icon_class_by_default()
+    public function test_icons_are_given_the_icon_class_by_default()
     {
         $factory = new MaterialIconsBridgeFactory();
         $result = $factory->icon('arrow-thick-up')->toHtml();
@@ -34,17 +33,15 @@ class MaterialIconsBridgeFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
-    /** @test */
-    public function can_render_inline_icon()
+    public function test_can_render_inline_icon()
     {
-        $factory = new MaterialIconsBridgeFactory(['inline' => true, 'class' => 'icon', 'icon_path' => __DIR__.'/resources/icons/']);
+        $factory = new MaterialIconsBridgeFactory(['class' => 'icon', 'icon_path' => __DIR__.'/resources/icons/']);
         $result = $factory->icon('arrow-thick-up')->toHtml();
         $expected = '<svg class="icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10v8h6v-8h5l-8-8-8 8h5z" fill-rule="evenodd"/></svg>';
         $this->assertEquals($expected, $result);
     }
 
-    /** @test */
-    public function can_render_icon_with_additional_classes()
+    public function test_can_render_icon_with_additional_classes()
     {
         $factory = new MaterialIconsBridgeFactory();
         $result = $factory->icon('arrow-thick-up', 'icon-lg inline-block')->toHtml();
@@ -52,8 +49,7 @@ class MaterialIconsBridgeFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
-    /** @test */
-    public function can_specify_additional_attributes_as_an_array()
+    public function test_can_specify_additional_attributes_as_an_array()
     {
         $factory = new MaterialIconsBridgeFactory();
         $result = $factory->icon('arrow-thick-up', 'icon-lg', ['alt' => 'Alt text', 'id' => 'arrow-icon'])->toHtml();
@@ -61,8 +57,7 @@ class MaterialIconsBridgeFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
-    /** @test */
-    public function can_skip_class_parameter()
+    public function test_can_skip_class_parameter()
     {
         $factory = new MaterialIconsBridgeFactory();
         $result = $factory->icon('arrow-thick-up', ['alt' => 'Alt text', 'id' => 'arrow-icon'])->toHtml();
@@ -70,8 +65,7 @@ class MaterialIconsBridgeFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
-    /** @test */
-    public function attributes_without_keys_are_used_as_valueless_html_attributes()
+    public function test_attributes_without_keys_are_used_as_valueless_html_attributes()
     {
         $factory = new MaterialIconsBridgeFactory();
         $result = $factory->icon('arrow-thick-up', ['alt' => 'Alt text', 'data-foo'])->toHtml();
