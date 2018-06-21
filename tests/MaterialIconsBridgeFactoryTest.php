@@ -1,10 +1,12 @@
 <?php
 
-use MaterialIcons\MaterialIconsBridgeFactory;
+use PHPUnit\Framework\TestCase;
 use Illuminate\Support\HtmlString;
 use Illuminate\Filesystem\Filesystem;
+use MaterialIcons\MaterialIconsBridgeFactory;
 
-class MaterialIconsBridgeFactoryTest extends PHPUnit_Framework_TestCase
+
+class MaterialIconsBridgeFactoryTest extends TestCase
 {
     const ARROW_SVG_TEST_FILE = __DIR__ . '/resources/icons/arrow-thick-up.svg';
     
