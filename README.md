@@ -12,11 +12,9 @@ You can install this package via Composer by running this command in your termin
 composer require avvertix/materialicons-laravel-bridge
 ```
 
-**For Laravel >=5.5**
+#### For Laravel 5.3 or 5.4 
 
-The library supports Laravel 5.5 autoload.
-
-**For Laravel <=5.4**
+**use version 0.1 of the library**
 
 Add the Material Iconset service provider to your `config/app.php` file:
 
