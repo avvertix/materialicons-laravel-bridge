@@ -3,8 +3,8 @@
 namespace MaterialIcons;
 
 use Exception;
-use BladeSvg\IconFactory;
-use BladeSvg\Icon;
+use BladeSvg\SvgFactory;
+use BladeSvg\Svg;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 use Illuminate\Filesystem\Filesystem;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Blade;
  * Handle the inclusion of an icon stored in a SVG file
  *
  *
- * @uses BladeSvg\IconFactory
+ * @uses BladeSvg\SvgFactory
  */
 class MaterialIconsBridgeFactory
 {
@@ -33,11 +33,11 @@ class MaterialIconsBridgeFactory
         'class' => 'icon',
         'inline' => true,
         'spritesheet_path' => null,
-        'icon_path' => self::DEFAULT_ICONSET_PATH,
+        'svg_path' => self::DEFAULT_ICONSET_PATH,
     ];
 
     /**
-     * @var IconFactory
+     * @var SvgFactory
      */
     private $iconFactory = null;
 
@@ -47,12 +47,12 @@ class MaterialIconsBridgeFactory
      *
      * @param array $config an associative array that stores the configuration options.
      * @param Filesystem $filesystem the instance of the filesystem to use. Default null, a default Filesystem instance will be created
-     * @return IconsetFactory
+     * @return MaterialIconsBridgeFactory
      */
     public function __construct($config = [], $filesystem = null)
     {
         $this->config = Collection::make(array_merge($this->config, $config));
-        $this->iconFactory = new IconFactory($this->config->toArray(), $filesystem);
+        $this->iconFactory = new SvgFactory($this->config->toArray(), $filesystem);
     }
 
     /**
@@ -82,7 +82,7 @@ class MaterialIconsBridgeFactory
      */
     public function icon($name, $class = '', $attrs = [])
     {
-        return $this->iconFactory->icon($name, $class, $attrs);
+        return $this->iconFactory->svg($name, $class, $attrs);
     }
 
 
@@ -102,7 +102,7 @@ class MaterialIconsBridgeFactory
     {
         $path = sprintf('%s/svg/production/ic_%s_24px', $set, $name);
 
-        return $this->iconFactory->icon($path, $class, $attrs);
+        return $this->iconFactory->svg($path, $class, $attrs);
     }
 
 }
