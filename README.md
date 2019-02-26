@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/avvertix/materialicons-laravel-bridge.svg?branch=master)](https://travis-ci.org/avvertix/materialicons-laravel-bridge)
+[![Build Status](https://travis-ci.com/avvertix/materialicons-laravel-bridge.svg?branch=master)](https://travis-ci.com/avvertix/materialicons-laravel-bridge)
 
 # Material Icons Laravel Bridge
 
