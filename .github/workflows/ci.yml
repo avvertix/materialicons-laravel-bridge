@@ -20,6 +20,7 @@ jobs:
         fetch-depth: 1
     - name: Set Laravel version
       run: |
+        ls -la
         composer require "illuminate/support:${{ matrix.laravel }}" --no-update
         composer require "illuminate/filesystem:${{ matrix.laravel }}" --no-update
     - name: Composer update
