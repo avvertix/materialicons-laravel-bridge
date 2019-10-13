@@ -22,7 +22,7 @@ jobs:
       run: |
         pwd
         ls -la
-        chown -R root .
+        sudo chown -R root .
         composer require "illuminate/support:${{ matrix.laravel }}" --no-update
         composer require "illuminate/filesystem:${{ matrix.laravel }}" --no-update
     - name: Composer update
