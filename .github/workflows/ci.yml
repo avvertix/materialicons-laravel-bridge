@@ -1,0 +1,28 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  phpunit:
+    name: Test on laravel ${{ matrix.laravel }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        laravel: [5.7]
+
+    container:
+      image: edbizarro/gitlab-ci-pipeline-php:7.1
+    
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - name: Set Laravel version
+      run: |
+        composer require "illuminate/support:${{ matrix.laravel }}" --no-update
+        composer require "illuminate/filesystem:${{ matrix.laravel }}" --no-update
+    - name: Composer update
+      run: composer update --no-interaction --prefer-dist
+    - name: Run Testsuite
+      run: ./vendor/bin/phpunit
