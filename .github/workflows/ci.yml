@@ -12,7 +12,7 @@ jobs:
         laravel: ["5.7", "5.8"]
 
     container:
-      image: php:7.2-cli
+      image: jackmdavis97/php:7.3
     
     steps:
     - uses: actions/checkout@v1
