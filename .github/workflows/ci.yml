@@ -12,7 +12,7 @@ jobs:
         laravel: [5.7]
 
     container:
-      image: edbizarro/gitlab-ci-pipeline-php:7.1
+      image: php:7.1
     
     steps:
     - uses: actions/checkout@v1
