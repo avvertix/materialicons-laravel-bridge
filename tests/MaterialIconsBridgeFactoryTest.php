@@ -12,12 +12,12 @@ class MaterialIconsBridgeFactoryTest extends TestCase
     
     const ICONS_LOCATION = __DIR__ . '/../assets/icons/';
 
-    protected function setUp()
+    protected function setUp(): void
     {
         copy(self::ARROW_SVG_TEST_FILE, self::ICONS_LOCATION . basename(self::ARROW_SVG_TEST_FILE));
     }
     
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $path = self::ICONS_LOCATION . basename(self::ARROW_SVG_TEST_FILE);
 
