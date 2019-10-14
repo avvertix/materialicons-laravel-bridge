@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.4.0] - 2019-10-14
+
+- Add support for Laravel 6.x 
+- Drop PHP 7.0 support
+- Add `snake_case` helper to support usage of BladeSVG <=0.3.2 in Laravel 6.x. 
+  Please note that this helper is for internal use only and 
+  will be removed as soon as BladeSVG >0.3.2 will be out
+
 ## [0.3.0] - 2019-02-27
 
 - Add support for Laravel 5.7 and 5.8
