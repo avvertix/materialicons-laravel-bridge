@@ -54,6 +54,8 @@ if (! function_exists('snake_case')) {
      * @param  string  $value
      * @param  string  $delimiter
      * @return string
+     * @internal
+     * @deprecated use Illuminate\Support\Str@snake instead
      */
     function snake_case($value, $delimiter = '_')
     {
