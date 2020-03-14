@@ -40,25 +40,3 @@ if (! function_exists('materialicon')) {
         return app(MaterialIconsBridgeFactory::class)->materialicon($set, $icon, $class, $attrs);
     }
 }
-
-if (! function_exists('snake_case')) {
-
-    /**
-     * Convert a string to snake case.
-     *
-     * Alias of Illuminate\Support\Str@snake 
-     * 
-     * Added to allow nothingworks/blade-svg:0.3.2 which still uses the helper.
-     * Once a new version will be released, this helper will go away
-     * 
-     * @param  string  $value
-     * @param  string  $delimiter
-     * @return string
-     * @internal
-     * @deprecated use Illuminate\Support\Str@snake instead
-     */
-    function snake_case($value, $delimiter = '_')
-    {
-        return Str::snake($value, $delimiter);
-    }
-}
