@@ -4,9 +4,9 @@
 
 Easily use Google Material Design SVG icons in Laravel Blade templates.
 
-> Laravel >= 5.5 and 6.x
+> Requires **Laravel >= 6.0** and **PHP >= 7.2**
 
-> PHP >= 7.1 
+> If you need compatibility with Laravel 5.8 and below use version 0.4.0
 
 ## Installation
 
