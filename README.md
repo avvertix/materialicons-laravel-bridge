@@ -28,7 +28,7 @@ By default the class `icon` is added to the icon `svg` tag when inserted into a 
 behavior by overriding the configuration using the `config/materialiconset.php` file.
 
 > A ready to use configuration file can be inserted in your config directory using 
-> `php artisan vendor:publish --provider="MaterialIcons\MaterialIconsetServiceProvider"`
+> `php artisan vendor:publish --provider="MaterialIcons\MaterialIconsBridgeServiceProvider"`
 
 You can specify any default CSS classes you'd like to be applied to your icons using the `class` option:
 
