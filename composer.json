@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": ">=7.2.5",
-        "nothingworks/blade-svg": ">=0.3.4",
+        "nothingworks/blade-svg": "~0.3.4",
         "illuminate/support": "6.*|7.*",
         "illuminate/filesystem": "6.*|7.*"
     },
