@@ -2,13 +2,9 @@
 
 namespace MaterialIcons;
 
-use Exception;
-use BladeSvg\SvgFactory;
-use BladeSvg\Svg;
 use Illuminate\Support\Collection;
-use Illuminate\Support\HtmlString;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Blade;
+use BladeUI\Icons\Factory as SvgFactory;
 
 /**
  * Handle the inclusion of an icon stored in a SVG file
@@ -31,8 +27,6 @@ class MaterialIconsBridgeFactory
      */
     private $config = [
         'class' => 'icon',
-        'inline' => true,
-        'spritesheet_path' => null,
         'svg_path' => self::DEFAULT_ICONSET_PATH,
     ];
 
@@ -46,13 +40,11 @@ class MaterialIconsBridgeFactory
      *
      *
      * @param array $config an associative array that stores the configuration options.
-     * @param Filesystem $filesystem the instance of the filesystem to use. Default null, a default Filesystem instance will be created
      * @return MaterialIconsBridgeFactory
      */
-    public function __construct($config = [], $filesystem = null)
+    public function __construct($config = [])
     {
         $this->config = Collection::make(array_merge($this->config, $config));
-        $this->iconFactory = new SvgFactory($this->config->toArray(), $filesystem);
     }
 
     /**
@@ -60,14 +52,35 @@ class MaterialIconsBridgeFactory
      *
      * @return void
      */
-    public function registerBladeTag()
+    protected function registerBladeTag()
     {
-        Blade::directive('icon', function ($expression) {
-            return "<?php echo e(icon($expression)); ?>";
-        });
         Blade::directive('materialicon', function ($expression) {
-            return "<?php echo e(materialicon($expression)); ?>";
+            return "<?php echo e(materialicon($expression)); ? >";
         });
+    }
+    
+    /**
+     * Register iconset in Blade Icons
+     *
+     * @return void
+     */
+    protected function registerIconSet()
+    {
+        return app()->make(SvgFactory::class)->add('materialicons', [
+            'path' => $this->config['svg_path'],
+            'prefix' => 'materialicons',
+        ]);
+    }
+
+    /**
+     * Boot the package by registering blade tags and the iconset
+     */
+    public function boot(): self
+    {
+        $this->iconFactory = $this->registerIconSet();
+        $this->registerBladeTag();
+
+        return $this;
     }
 
     /**
@@ -78,11 +91,18 @@ class MaterialIconsBridgeFactory
      * @param string $name The icon name (without the extension)
      * @param string $class The eventual class tag to be applied. Default nothing
      * @param array $attrs Other HTML attributes as an associative array
-     * @return string the SVG to render the icon
+     * @return \BladeUI\Icons\Svg the SVG to render the icon
+     * @deprecated
      */
     public function icon($name, $class = '', $attrs = [])
     {
-        return $this->iconFactory->svg($name, $class, $attrs);
+        if(is_array($class) && empty($attrs)){
+            $attrs = $class;
+            $class = '';
+        }
+        $full_class = $attrs['class'] ?? implode(" ", [$this->config['class'], $class]);
+
+        return $this->iconFactory->svg($name, $full_class, $attrs);
     }
 
 
@@ -96,13 +116,17 @@ class MaterialIconsBridgeFactory
      * @param string $name The icon name (e.g. alarm)
      * @param string $class The eventual class tag to be applied. Default nothing
      * @param array $attrs Other HTML attributes as an associative array
-     * @return string the SVG to render the icon
+     * @return \BladeUI\Icons\Svg the SVG to render the icon
      */
     public function materialicon($set, $name, $class = '', $attrs = [])
     {
-        $path = sprintf('%s/svg/production/ic_%s_24px', $set, $name);
+        $full_class = implode(" ", [$this->config['class'], $class]);
 
-        return $this->iconFactory->svg($path, $class, $attrs);
+        $prefixed_set = "materialicons-$set";
+
+        $path = sprintf('%s/svg/production/ic_%s_24px', $prefixed_set, $name);
+
+        return $this->iconFactory->svg($path, $full_class, $attrs);
     }
 
 }

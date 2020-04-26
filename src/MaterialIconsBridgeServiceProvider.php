@@ -8,7 +8,7 @@ class MaterialIconsBridgeServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        app(MaterialIconsBridgeFactory::class)->registerBladeTag();
+        app(MaterialIconsBridgeFactory::class)->boot();
 
         $this->publishes([
             __DIR__.'/../config/materialiconset.php' => config_path('materialiconset.php'),
