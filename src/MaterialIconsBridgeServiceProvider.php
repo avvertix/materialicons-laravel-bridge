@@ -2,17 +2,33 @@
 
 namespace MaterialIcons;
 
+use BladeUI\Icons\Factory;
 use Illuminate\Support\ServiceProvider;
 
-class MaterialIconsBridgeServiceProvider extends ServiceProvider
+final class MaterialIconsBridgeServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
-        app(MaterialIconsBridgeFactory::class)->boot();
+        $config = [
+            'class' => config('materialiconset.class') ? config('materialiconset.class') : 'icon',
+            'icon_path' => config('materialiconset.icon_path') ? base_path(config('materialiconset.icon_path')) : MaterialIconsBridgeFactory::DEFAULT_ICONSET_PATH,
+        ];
 
-        $this->publishes([
-            __DIR__.'/../config/materialiconset.php' => config_path('materialiconset.php'),
-        ]);
+        app(MaterialIconsBridgeFactory::class)
+            ->registerIconsets()
+            ->registerBladeTag();
+
+        // dump($this->app->make(Factory::class))->add('heroicons', [
+        //     'path' => __DIR__ . '/../resources/svg',
+        //     'prefix' => 'heroicon',
+        // ]);
+
+        if ($this->app->runningInConsole()) {
+            // DEPRECATED
+            $this->publishes([
+                __DIR__.'/../config/materialiconset.php' => config_path('materialiconset.php'),
+            ], 'blade-materialicons');
+        }
     }
 
     public function register()
@@ -22,7 +38,7 @@ class MaterialIconsBridgeServiceProvider extends ServiceProvider
                 'class' => config('materialiconset.class') ? config('materialiconset.class') : 'icon',
                 'icon_path' => config('materialiconset.icon_path') ? base_path(config('materialiconset.icon_path')) : MaterialIconsBridgeFactory::DEFAULT_ICONSET_PATH,
             ];
-            return new MaterialIconsBridgeFactory($config);
+            return new MaterialIconsBridgeFactory($this->app->make(Factory::class), $config);
         });
     }
 }
