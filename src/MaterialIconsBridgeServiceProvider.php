@@ -2,27 +2,41 @@
 
 namespace MaterialIcons;
 
+use BladeUI\Icons\Factory;
 use Illuminate\Support\ServiceProvider;
 
-class MaterialIconsBridgeServiceProvider extends ServiceProvider
+final class MaterialIconsBridgeServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
-        app(MaterialIconsBridgeFactory::class)->registerBladeTag();
 
-        $this->publishes([
-            __DIR__.'/../config/materialiconset.php' => config_path('materialiconset.php'),
-        ]);
+        app(MaterialIconsBridgeFactory::class)
+                ->registerBladeTag();
+
+        if ($this->app->runningInConsole()) {
+            /** @deprecated */
+            $this->publishes([
+                __DIR__.'/../config/materialiconset.php' => config_path('materialiconset.php'),
+            ], 'blade-materialicons');
+        }
     }
 
     public function register()
     {
-        $this->app->singleton(MaterialIconsBridgeFactory::class, function () {
-            $config = [
-                'class' => config('materialiconset.class') ? config('materialiconset.class') : 'icon',
-                'icon_path' => config('materialiconset.icon_path') ? base_path(config('materialiconset.icon_path')) : MaterialIconsBridgeFactory::DEFAULT_ICONSET_PATH,
-            ];
-            return new MaterialIconsBridgeFactory($config);
+        
+        $this->callAfterResolving(Factory::class, function (Factory $factory) {
+
+            $this->app->singleton(MaterialIconsBridgeFactory::class, function () use ($factory) {
+                /** @deprecated */
+                $config = [
+                    'class' => config('materialiconset.class') ? config('materialiconset.class') : 'icon',
+                ];
+                return new MaterialIconsBridgeFactory($factory, $config);
+            });
+
+
+            app(MaterialIconsBridgeFactory::class)
+                ->registerIconsets();
         });
     }
 }
