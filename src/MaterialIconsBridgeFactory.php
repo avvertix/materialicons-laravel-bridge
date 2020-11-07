@@ -3,6 +3,7 @@
 namespace MaterialIcons;
 
 use BladeUI\Icons\Factory;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
 
@@ -64,8 +65,7 @@ class MaterialIconsBridgeFactory
     public function __construct(Factory $bladeSvgFactory, $config = [])
     {
         $this->iconFactory = $bladeSvgFactory;
-        /** @deprecated */
-        $this->config = Collection::make(array_merge($this->config, $config));
+        $this->config = Collection::make($this->config)->merge(Arr::only($config, 'class'));
     }
 
     /**
