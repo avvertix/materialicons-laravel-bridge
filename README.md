@@ -10,7 +10,7 @@ For a full list of available icons see the [SVG directories](./assets/icons).
 ## Requirements
 
 - PHP 7.2 or higher
-- Laravel 7.14
+- Laravel 7.14 or higher
 - [`blade-ui-kit/blade-icons`](https://github.com/blade-ui-kit/blade-icons)
 
 > Using version `1.x`? Check the [upgrade guide](./UPGRADE.md).

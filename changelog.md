@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [2.0.0] - 2020-11-07
+
+- Add support for Laravel 8.x 
+- Drop support for Laravel 6.0
+- Require `blade-ui-kit/blade-icons` instead of `nothingworks/blade-svg` (_breaking change_)
+- Remove `icon` helper (_breaking change_)
+- Keep only icons with size of 24px, remove 18px, 36px and 48px variants (_breaking change_)
+- Remove support for sprite sheets as consequence of `blade-ui-kit/blade-icons` update (_breaking change_)
+- Remove ability to set `svg_path` configuration value (_breaking change_)
+
+## [1.0.1] - 2020-06-29
+
+- Blocked BladeSVG required version to 0.3.4
+
 ## [1.0.0] - 2020-03-14
 
 - Add support for Laravel 7.x 
