@@ -57,13 +57,14 @@ class MaterialIconsBridgeFactory
     /**
      * Instantiate the Iconset factory for a given set of icons
      *
-     *
+     * @param \BladeUI\Icons\Factory $bladeSvgFactory The Blade UI Icons factory instance.
      * @param array $config an associative array that stores the configuration options.
      * @return MaterialIconsBridgeFactory
      */
     public function __construct(Factory $bladeSvgFactory, $config = [])
     {
         $this->iconFactory = $bladeSvgFactory;
+        /** @deprecated */
         $this->config = Collection::make(array_merge($this->config, $config));
     }
 
@@ -75,7 +76,7 @@ class MaterialIconsBridgeFactory
     public function registerBladeTag(): self
     {
         Blade::directive('materialicon', function ($expression) {
-            return "<?php echo e(materialicon($expression)); ? >";
+            return "<?php echo e(materialicon($expression)); ?>";
         });
 
         return $this;
@@ -89,9 +90,9 @@ class MaterialIconsBridgeFactory
     public function registerIconSets(): self
     {
         foreach ($this->subsets as $subset) {
-            $this->iconFactory->add("materialicons.$subset", [
-                'path' => $this->config['svg_path'] . "/$subset",
-                'prefix' => "materialicons.$subset",
+            $this->iconFactory->add("materialicons_$subset", [
+                'path' => $this->config['svg_path'] . "/$subset/svg/production",
+                'prefix' => "materialicon_$subset",
             ]);
         }
 
@@ -104,7 +105,7 @@ class MaterialIconsBridgeFactory
      * This method enables to retrieve an icon from the Google Material Design icon 
      * set
      *
-     * @param string $set The icon set (e.g. action)
+     * @param string $set The icon set within Material UI icons (e.g. action)
      * @param string $name The icon name (e.g. alarm)
      * @param string $class The eventual class tag to be applied. Default nothing
      * @param array $attrs Other HTML attributes as an associative array
@@ -114,11 +115,35 @@ class MaterialIconsBridgeFactory
     {
         $full_class = implode(" ", [$this->config['class'], $class]);
 
-        $prefixed_set = "materialicons-$set";
+        $prefixed_set = "materialicon_$set";
 
-        $path = sprintf('%s/svg/production/ic_%s_24px', $prefixed_set, $name);
+        $icon = sprintf('%s-ic_%s_24px', $prefixed_set, $name);
 
-        return $this->iconFactory->svg($path, $full_class, $attrs);
+        return $this->iconFactory->svg($icon, $full_class, $attrs);
+    }
+
+    /**
+     * Outputs an SVG icon.
+     *
+     * This method grab the icon whose name is $name and is in the configured path
+     *
+     * @param string $name The icon name (without the extension)
+     * @param string $class The eventual class tag to be applied. Default nothing
+     * @param array $attrs Other HTML attributes as an associative array
+     * @return \BladeUI\Icons\Svg the SVG to render the icon
+     * @deprecated Use Blade UI Icons directives and helpers https://github.com/blade-ui-kit/blade-icons#directive. Will be removed in version 2.0
+     */
+    public function icon($name, $class = '', $attrs = [])
+    {
+        if(is_array($class) && empty($attrs)){
+            $attrs = $class;
+            $class = '';
+        }
+        $full_class = $attrs['class'] ?? implode(" ", [$this->config['class'], $class]);
+
+        $icon = "materialicon_$name";
+
+        return $this->iconFactory->svg($icon, $full_class, $attrs);
     }
 
 }

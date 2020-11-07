@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Str;
 use MaterialIcons\MaterialIconsBridgeFactory;
 
 if (! function_exists('materialicon')) {

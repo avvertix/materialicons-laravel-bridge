@@ -1,0 +1,1 @@
+<x-materialicon_toggle-ic_star_half_24px />
