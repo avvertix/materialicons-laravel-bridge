@@ -8,8 +8,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
 
 /**
- * Handle the inclusion of an icon stored in a SVG file
- *
+ * Enable to use Material icons SVG files in Blade views
  *
  * @uses BladeUI\Icons\Factory
  */
@@ -69,7 +68,7 @@ class MaterialIconsBridgeFactory
     }
 
     /**
-     * Register the blade extension directives
+     * Register the blade directives
      *
      * @return self
      */
@@ -118,30 +117,6 @@ class MaterialIconsBridgeFactory
         $prefixed_set = "materialicon_$set";
 
         $icon = sprintf('%s-ic_%s_24px', $prefixed_set, $name);
-
-        return $this->iconFactory->svg($icon, $full_class, $attrs);
-    }
-
-    /**
-     * Outputs an SVG icon.
-     *
-     * This method grab the icon whose name is $name and is in the configured path
-     *
-     * @param string $name The icon name (without the extension)
-     * @param string $class The eventual class tag to be applied. Default nothing
-     * @param array $attrs Other HTML attributes as an associative array
-     * @return \BladeUI\Icons\Svg the SVG to render the icon
-     * @deprecated Use Blade UI Icons directives and helpers https://github.com/blade-ui-kit/blade-icons#directive. Will be removed in version 2.0
-     */
-    public function icon($name, $class = '', $attrs = [])
-    {
-        if(is_array($class) && empty($attrs)){
-            $attrs = $class;
-            $class = '';
-        }
-        $full_class = $attrs['class'] ?? implode(" ", [$this->config['class'], $class]);
-
-        $icon = "materialicon_$name";
 
         return $this->iconFactory->svg($icon, $full_class, $attrs);
     }

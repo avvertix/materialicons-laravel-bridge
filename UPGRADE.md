@@ -46,6 +46,16 @@ This behavior, to use the exact filename, is part of Blade Icons `svg` helper
 and `@svg` directive. Blade Icons, the library that powers this package, offers also 
 Blade components to obtain the same effect.
 
+**Change to the public api of `MaterialIconsBridgeFactory`**
+
+If you were using the `MaterialIconsBridgeFactory` or extending it you should be aware of the 
+following changes:
+
+- Removed `icon` method for the same reason as the `icon` helper;
+- Removed the `boot` method;
+- The constructor now takes an instance of `BladeUI\Icons\Factory` as first parameter.
+
+
 **Sprite Sheets Removed**
 
 All functionality concerning sprite sheets have been removed. The package didn't really offered sprite sheets, but it was part of `blade-svg` and so we feel that is a breaking change worth mentioning.
