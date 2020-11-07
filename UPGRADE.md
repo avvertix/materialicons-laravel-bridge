@@ -60,7 +60,7 @@ following changes:
 
 All functionality concerning sprite sheets have been removed. The package didn't really offered sprite sheets, but it was part of `blade-svg` and so we feel that is a breaking change worth mentioning.
 
-**Removal of 48 pixels size variant**
+**Removal of size variants**
 
-Icons with size of `48px` have been removed because unused and to reduce the package size.
+Icons with size of `12px`, `18px`, `36px` and `48px` have been removed because unused and to reduce the package size.
 This size was not used as the helpers and directives didn't allow to specify a size option.
