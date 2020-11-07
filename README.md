@@ -1,12 +1,19 @@
-[![Build Status](https://travis-ci.com/avvertix/materialicons-laravel-bridge.svg?branch=master)](https://travis-ci.com/avvertix/materialicons-laravel-bridge)
+![CI](https://github.com/avvertix/materialicons-laravel-bridge/workflows/CI/badge.svg)
 
 # Material Icons Laravel Bridge
 
 Easily use Google Material Design SVG icons in Laravel Blade templates.
 
-> Requires **Laravel >= 6.0** and **PHP >= 7.2**
+For a full list of available icons see the [SVG directories](./assets/icons).
 
-> If you need compatibility with Laravel 5.8 and below use version 0.4.0
+
+## Requirements
+
+- PHP 7.2 or higher
+- Laravel 7.14
+- [`blade-ui-kit/blade-icons`](https://github.com/blade-ui-kit/blade-icons)
+
+> Using version `1.x`? Check the [upgrade guide](./UPGRADE.md).
 
 ## Installation
 
@@ -21,11 +28,9 @@ composer require avvertix/materialicons-laravel-bridge
 
 ## Configuration
 
-Out of the box the service uses the icons inside the package (under the `assets/icons` folder), but you can 
-use [another set of icons](#use-another-icon-set).
-
-By default the class `icon` is added to the icon `svg` tag when inserted into a page. You can change this 
-behavior by overriding the configuration using the `config/materialiconset.php` file.
+By default the class `icon` is added to the `svg` tag when inserted into a page. 
+You can change this behavior by overriding the configuration using 
+the `config/materialiconset.php` file.
 
 > A ready to use configuration file can be inserted in your config directory using 
 > `php artisan vendor:publish --provider="MaterialIcons\MaterialIconsBridgeServiceProvider"`
@@ -43,86 +48,86 @@ return [
 ```
 
 You can specify multiple classes by separating them with a space, just like you would in an HTML class 
-attribute
+attribute.
 
-## Basic Usage
+## Usage
 
-To insert an icon in your template, simply use the `@materialicon` Blade directive, passing the name of 
-the icon and optionally any additional classes:
+### Blade directive
 
-```html
+To insert an icon in your template use the `@materialicon` directive, passing the name of 
+the material icon set, the name of the icon and optionally any additional classes:
+
+```blade
 <a href="/settings">
     @materialicon('action', 'settings', 'icon-lg') Settings
-</a>
-
-<!-- Renders.. -->
-<a href="/settings">
-    <svg class="icon icon-lg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-        <path d="M19.43 ...(full path omitted for brevity)... 3.5z"/>
-    </svg>
-    Settings
 </a>
 ```
 
 To add additional attributes to the rendered SVG tag, pass an associative array as the third parameter:
 
-```html
+```blade
 <a href="/settings">
     @materialicon('action', 'settings', 'icon-lg', ['alt' => 'Gear icon']) Settings
-</a>
-
-<!-- Renders.. -->
-<a href="/settings">
-    <svg class="icon icon-lg" alt="Gear icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-        <path d="M19.43 ...(full path omitted for brevity)... 3.5z"/>
-    </svg>
-    Settings
 </a>
 ```
 
 If you'd like, you can use the `materialicon` helper directly. The helper exposes a fluent syntax for setting icon 
 attributes:
 
-```html
+```blade
 <a href="/settings">
     {{ materialicon('actions', 'settings')->alt('Alt text')->dataFoo('bar')->dataBaz() }} Settings
 </a>
+```
 
-<!-- Renders.. -->
-<a href="/settings">
-    <svg class="icon" alt="Alt text" data-foo="bar" data-baz>
-        <path d="M19.43 ...(full path omitted for brevity)... 3.5z"/>
-    </svg>
-    Settings
-</a>
+### Blade components
+
+All icons are available as Blade components, thanks to [Blade Icons](https://github.com/blade-ui-kit/blade-icons#components)
+
+```blade
+<x-materialicon_toggle-ic_star_half_24px />
+```
+
+> The component name format is: package name `materialicon`, the set within the package `toggle` 
+and the file name `ic_star_half_24px`.
+
+You can also pass classes to your icon components:
+
+```blade
+<x-materialicon_toggle-ic_star_half_24px class="icon-lg"/>
+```
+
+Or any other attributes for that matter:
+
+```blade
+<x-materialicon_toggle-ic_star_half_24px class="icon-lg" id="settings-icon" style="color: #555" data-baz/>
+```
+
+### Helper
+
+If you'd like, you can use the `materialicon` helper to expose a fluent syntax for setting SVG attributes:
+
+```blade
+{{ materialicon('toggle', 'star_half')->id('star-icon')->dataFoo('bar')->dataBaz() }}
 ```
 
 ## Use another icon set
 
 Even if this package makes easy to use Google's Material Design icons, it is not limited to that iconset.
 
-You can still use a different iconset by passing the `icon_path` option in the `config/materialiconset.php`
-configuration file. The path refers to the location that contains your individual icons as separate SVG files.
+You can still use a different iconset as behind the scenes the [`blade-ui-kit/blade-icons`](https://github.com/blade-ui-kit/blade-icons) package is used.
 
-```php
-<?php
+Please check [Blade Icon's documentation](https://github.com/blade-ui-kit/blade-icons#configuration) for
+all the configuration options and how to insert icons within your Blade views.
 
-return [
-    // ...
-    'icon_path' => 'resources/assets/svg/icons',
-    // ...
-];
-```
+## Upgrade
 
-> The path is resolved using the `base_path()` helper, so use a relative path to the root of your project.
-
-If you want more freedom (e.g. SVG sprite support) I encourage you to check the 
-[Blade SVG](https://github.com/adamwathan/blade-svg) package by Adam Wathan.
+Upgrading from an older version? Check the [upgrade guide](./UPGRADE.md).
 
 ## Credits
 
 - The icons comes from the [Google Material Design Icons](https://github.com/google/material-design-icons) 
-  package.
-- The package functionality is built on top of the great 
-  [Blade SVG](https://github.com/adamwathan/blade-svg) package by Adam Wathan
+  package;
+- The package functionality was originally created on top of the great Blade SVG package by Adam Wathan now 
+  handed to Dries Vints as `blade-ui-kit/blade-icons`.
 
