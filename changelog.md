@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [2.0.1] - 2020-12-05
+
+- Remove fill color defined on some icons in action, av, content, editor and navigation groups
+
 ## [2.0.0] - 2020-11-07
 
 - Add support for Laravel 8.x 
