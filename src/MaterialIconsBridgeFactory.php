@@ -106,12 +106,20 @@ class MaterialIconsBridgeFactory
      *
      * @param string $set The icon set within Material UI icons (e.g. action)
      * @param string $name The icon name (e.g. alarm)
-     * @param string $class The eventual class tag to be applied. Default nothing
+     * @param string|array $class The eventual class tag to be applied. Default nothing
      * @param array $attrs Other HTML attributes as an associative array
      * @return \BladeUI\Icons\Svg the SVG to render the icon
      */
     public function materialicon($set, $name, $class = '', $attrs = [])
     {
+        if(is_array($class)){
+            if(isset($class['class'])){
+                $attrs = array_merge($attrs, Arr::except($class, 'class') ?? []);
+            }
+
+            $class = $class['class'] ?? implode(' ', $class ?? []);
+        }
+
         $full_class = implode(" ", [$this->config['class'], $class]);
 
         $prefixed_set = "materialicon_$set";
