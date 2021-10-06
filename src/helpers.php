@@ -14,7 +14,7 @@ if (! function_exists('materialicon')) {
      * @param string $name The icon name (e.g. alarm)
      * @param string $class The eventual class tag to be applied. Default nothing
      * @param array $attrs Other HTML attributes as an associative array
-     * @return string the SVG to render the icon
+     * @return \BladeUI\Icons\Svg the SVG to render the icon
      */
     function materialicon($set, $icon, $class = '', $attrs = [])
     {
