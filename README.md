@@ -1,5 +1,9 @@
 ![CI](https://github.com/avvertix/materialicons-laravel-bridge/workflows/CI/badge.svg)
 
+> [!IMPORTANT]
+> Material Icons Laravel Bridge has been deprecated with 2.1.0 as the last release. There are a number of alternatives based on [Blade Icons (Blade UI Kit)](https://github.com/blade-ui-kit/blade-icons?tab=readme-ov-file#icon-packages). Thank you for the support and contributions over the years. The repository will remain open and archived.
+
+
 # Material Icons Laravel Bridge
 
 Easily use Google Material Design SVG icons in Laravel Blade templates.
